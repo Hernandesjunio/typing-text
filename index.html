@@ -5,17 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cursor typing</title>
-    <link rel="stylesheet" href="style.css" />    
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .button-typing {
+        font-size: 1.3568em;
+        padding: 5px 20px;
+        color: black;
+        background-color: bisque;
+        outline: none;
+        border-radius: 8px;
+        transition: transform 0.3s;
+      }
+
+      .button-typing[disabled] {
+        opacity: 0.6;
+      }
+
+      .button-typing:hover:not([disabled]) {
+        transform: scale(1.1);
+        transition: transform 0.3s;
+      }
+    </style>
   </head>
-  <body>
-    <span  class="cursor-typing hide">.</span>
-    <span  class="container-typing hide" style="display: inline-block">
+  <body style="height: 1500px; margin-bottom: 100vh; padding-top: 400px">
+    <div>
+      <button class="button-typing">Start</button>
+    </div>
+    <span
+      class="container-typing hide-element-typing"
+      style="display: inline-block"
+    >
       <div id="parameters" class="notesChild containerFlex typingCursor">
         <span>
           <span class="attributeColorCSS">
             <ol>
               <li class="stop">
-                tabledata: <span class="class-color">Object | Array </span> -
+                tabledata:&nbsp;<span class="class-color">Object | Array </span>
+                -
                 <span class="tagGrayColor stop"
                   >objeto ou array a ser exibido na tabela.</span
                 >
@@ -25,7 +52,8 @@
                 tablecolumns<span class="symbols-color">?</span>:
                 <span class="classColor">Array </span> -
                 <span class="tagGrayColor stop"
-                  >um array contendo os nomes <span class="stop">das colunas</span> a serem exibidas na
+                  >um array contendo os nomes
+                  <span class="stop">das colunas</span> a serem exibidas na
                   tabela.</span
                 >
               </li>
@@ -35,5 +63,12 @@
       </div>
     </span>
     <script src="./type.js"></script>
+    <script type="text/javascript">
+      (function () {
+        const typingObj = typingJS({ callback: () => console.log("End") });
+        const button = document.querySelector(".button-typing");
+        button.addEventListener("click", () => typingObj.execute());
+      })();
+    </script>
   </body>
 </html>
