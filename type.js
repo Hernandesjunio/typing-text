@@ -1,5 +1,4 @@
 function typingJS(options) {
-
   const createStyle = () => {
     if (document.querySelector("typingStyle")) return;
     const css = `.hide-element-typing{opacity:0;font-size:20px}.show-element-typing{opacity:1;transition:opacity .3s;font-size:20px}.cursor-typing{position:absolute;color:transparent}.cursor-typing:before{content:".";width:4px;height:10px;background-color:green;color:green;animation:cursor .8s infinite}@keyframes cursor{0%{opacity:1}50%{opacity:0}100%{opacity:1}}`;
@@ -11,7 +10,8 @@ function typingJS(options) {
 
   const processText = (element) => {
     let index = 0;
-    const wrapChar = (char) => `<span class="hide-element-typing char">${char}</span>`;
+    const wrapChar = (char) =>
+      `<span class="hide-element-typing char">${char}</span>`;
     const replaceHtmlSymbols = (text) =>
       text.replace(/&\w+;/g, (c) => wrapChar(c));
 
@@ -69,9 +69,9 @@ function typingJS(options) {
 
   function processHiddenElements(cursorElement, options) {
     let index = 0;
-    const hiddenElements = [...document.querySelectorAll(".hide-element-typing")].filter(
-      (c) => c.innerText.length
-    );
+    const hiddenElements = [
+      ...document.querySelectorAll(".hide-element-typing"),
+    ].filter((c) => c.innerText.length);
 
     const currentHiddenElement = () => hiddenElements[index];
 
@@ -149,7 +149,8 @@ function typingJS(options) {
 
     element.classList.contains("hide-element-typing") === false &&
       element.classList.add("hide-element-typing");
-    element.classList.contains("show-element-typing") && element.classList.remove("show-element-typing");
+    element.classList.contains("show-element-typing") &&
+      element.classList.remove("show-element-typing");
 
     tagNames.includes(element.tagName) && element.classList.add("char");
   };
@@ -189,13 +190,6 @@ function typingJS(options) {
 
   if (typeof typingJS.executing == "undefined") typingJS.executing = false;
 
-  if (typingJS.executing) {
-    console.warn("Already executing");
-    return;
-  }
-
-  typingJS.executing = true;
-
   const proxy = options.callback;
 
   options.callback = () => {
@@ -206,7 +200,22 @@ function typingJS(options) {
   const cursorElement = getCursor();
 
   createStyle();
-  setClassDeepElements(container, options.tagNamesToHide);
-  processText(container);
-  processHiddenElements(cursorElement, options);
+
+  const step1 = () => setClassDeepElements(container, options.tagNamesToHide);
+  const step2 = () => processText(container);
+  const step3 = () => processHiddenElements(cursorElement, options);
+
+  const steps = [step1, step2, step3];
+
+  const executeFn = () => {
+    if (typingJS.executing) {
+      console.warn("Already executing");
+      return;
+    }
+
+    typingJS.executing = true;
+
+    steps.forEach((stepFn) => stepFn());
+  };
+  return { execute: executeFn };
 }
