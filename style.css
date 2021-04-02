@@ -216,43 +216,6 @@
       opacity: 1;
     }
   }
-  
-  .hide {
-    opacity: 0;
-    font-size: 20px;
-  }
-
-  .show {
-    opacity: 1;
-    transition: opacity 0.3s;
-    font-size: 20px;
-  }
-
-  .cursor-typing {
-    position: absolute;
-    color: transparent;
-  }
-  
-  .cursor-typing:before {
-    content: ".";
-    width: 4px;
-    height: 10px;
-    background-color: green;
-    color: green;
-    animation: cursor 0.8s infinite;
-  }
-
-  @keyframes cursor {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
 
   body {
     background-color: var(--bgVsCodeColor);
