@@ -10,10 +10,8 @@ function typingJS(options) {
 
   const processText = (element) => {
     let index = 0;
-    const wrapChar = (char) =>
-      `<span class="hide-element-typing char">${char}</span>`;
-    const replaceHtmlSymbols = (text) =>
-      text.replace(/&\w+;/g, (c) => wrapChar(c));
+    const wrapChar = (char) => `<span class="hide-element-typing char">${char}</span>`;
+    const replaceHtmlSymbols = (text) => text.replace(/&\w+;/g, (c) => wrapChar(c));
 
     const split = replaceHtmlSymbols(element.innerHTML).split("");
 
@@ -31,24 +29,22 @@ function typingJS(options) {
       }
     };
 
-    const skipHtmlSymbols = () => {
-      const isNotHtmlSymbolOpening = () =>
-        split.slice(index - 1, index + 1).join("") != ">&";
+    const skipHtmlOpeningClosingSymbols = () => {
+      const isNotHtmlOpeningTagSymbol = () => split.slice(index - 1, index + 1).join("") != ">&";
 
-      const isNotHtmlSymbolClosing = () =>
-        split.slice(index - 1, index + 1).join("") != ";<";
+      const isNotHtmlClosingTagSymbol = () => split.slice(index - 1, index + 1).join("") != ";<";
 
-      if (isNotHtmlSymbolOpening()) return;
+      if (isNotHtmlOpeningTagSymbol()) return;
 
-      while (hasSplitElements() && isNotHtmlSymbolClosing()) {
+      while (hasSplitElements() && isNotHtmlClosingTagSymbol()) {
         index++;
       }
     };
 
     const processArray = () => {
-      const isTagOpening = () => split[index] == "<";
+      const isOpeningTag = () => split[index] == "<";
 
-      while (hasSplitElements() && !isTagOpening()) {
+      while (hasSplitElements() && !isOpeningTag()) {
         split[index] = wrapChar(split[index]);
         index++;
       }
@@ -58,7 +54,7 @@ function typingJS(options) {
 
     element.classList.add("typing-ready");
 
-    const steps = [skipTag, skipHtmlSymbols, processArray];
+    const steps = [skipTag, skipHtmlOpeningClosingSymbols, processArray];
 
     while (hasSplitElements()) {
       steps.forEach((stepFn) => stepFn());
@@ -69,9 +65,7 @@ function typingJS(options) {
 
   function processHiddenElements(cursorElement, options) {
     let index = 0;
-    const hiddenElements = [
-      ...document.querySelectorAll(".hide-element-typing"),
-    ].filter((c) => c.innerText.length);
+    const hiddenElements = [...document.querySelectorAll(".hide-element-typing")].filter((c) => c.innerText.length);
 
     const currentHiddenElement = () => hiddenElements[index];
 
@@ -86,8 +80,7 @@ function typingJS(options) {
           value: 0,
         },
         {
-          keyFn: () =>
-            currentHiddenElement().classList.contains(options.timeSlowClass),
+          keyFn: () => currentHiddenElement().classList.contains(options.timeSlowClass),
           value: options.timeSlow,
         },
         { keyFn: () => true, value: 20 },
@@ -96,22 +89,17 @@ function typingJS(options) {
       return result.value;
     };
 
-    const setCursorLastElementCharacter = () => {
-      const lastElement = hiddenElements
-        .filter((c) => c.classList.contains("char"))
-        .slice(-1)[0];
+    const setCursorOnLastElementCharacter = () => {
+      const lastElement = hiddenElements.filter((c) => c.classList.contains("char")).slice(-1)[0];
 
       lastElement.append(cursorElement);
 
-      cursorElement.setAttribute(
-        "style",
-        `top:auto;left:auto;position:relative;opacity:1`
-      );
+      cursorElement.setAttribute("style", `top:auto;left:auto;position:relative;opacity:1`);
     };
 
     (function removeClass() {
       if (index == hiddenElements.length) {
-        setCursorLastElementCharacter();
+        setCursorOnLastElementCharacter();
         options.callback();
         return;
       }
@@ -136,10 +124,7 @@ function typingJS(options) {
 
     const { x, y } = element.getBoundingClientRect();
 
-    cursorElement.setAttribute(
-      "style",
-      `top:${y + offsetY}px;left:${x + offsetX}px;opacity:1`
-    );
+    cursorElement.setAttribute("style", `top:${y + offsetY}px;left:${x + offsetX}px;opacity:1`);
   };
 
   const setClassDeepElements = (element, tagNames) => {
@@ -147,10 +132,8 @@ function typingJS(options) {
       setClassDeepElements(child, tagNames);
     }
 
-    element.classList.contains("hide-element-typing") === false &&
-      element.classList.add("hide-element-typing");
-    element.classList.contains("show-element-typing") &&
-      element.classList.remove("show-element-typing");
+    element.classList.contains("hide-element-typing") === false && element.classList.add("hide-element-typing");
+    element.classList.contains("show-element-typing") && element.classList.remove("show-element-typing");
 
     tagNames.includes(element.tagName) && element.classList.add("char");
   };
@@ -183,10 +166,7 @@ function typingJS(options) {
 
   const container = document.querySelector(options.containerSelector);
 
-  if (!container)
-    throw new Error(
-      "The property 'containerSelector' doesn't constains a selector of valid element"
-    );
+  if (!container) throw new Error("Property 'containerSelector' doesn't contains a valid element selector");
 
   if (typeof typingJS.executing == "undefined") typingJS.executing = false;
 
