@@ -177,15 +177,22 @@ function typingJS(options) {
     proxy();
   };
 
-  const cursorElement = getCursor();
-
   createStyle();
 
-  const step1 = () => setClassDeepElements(container, options.tagNamesToHide);
-  const step2 = () => processText(container);
-  const step3 = () => processHiddenElements(cursorElement, options);
+  const step1 = (ctx) => (ctx.cursorElement = getCursor());
+  const step2 = () => setClassDeepElements(container, options.tagNamesToHide);
+  const step3 = () => processText(container);
+  const step4 = (ctx) => processHiddenElements(ctx.cursorElement, options);
 
-  const steps = [step1, step2, step3];
+  const chainOfResponsability = {
+    steps: [step1, step2, step3, step4],
+    context: {},
+    execute: function () {
+      this.steps.forEach((stepFn) => {
+        stepFn(this.context);
+      });
+    },
+  };
 
   const executeFn = () => {
     if (typingJS.executing) {
@@ -195,7 +202,7 @@ function typingJS(options) {
 
     typingJS.executing = true;
 
-    steps.forEach((stepFn) => stepFn());
+    chainOfResponsability.execute();
   };
   return { execute: executeFn };
 }
