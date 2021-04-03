@@ -1,222 +1,27 @@
 :root {
-    --classColor: #4cc5a1;
-    --stringColor: #d69d85;
-    --const-color: #4fc1ff;
-    --attributeColorCSS: #9cdcfe;
-    --tagGrayColor: #aeafad;
-    --elementSelectorColor: #4f9cd6;
-    --selectorColorCSS: #d7ba7d;
-    --methodColor: #dcdcaa;
-    --bgVsCodeColor: #1e1e1e;
-  }
-  
-  .class-color {
-    color: var(--classColor);
-  }
-  
-  .class-color b {
-    font-weight: normal;
-    color: var(--stringColor);
-  }
-  
-  .stringColor {
-    color: #d69d85;
-  }
-  
-  .attributeColorCSS {
-    color: #9cdcfe;
-  }
-  
-  .tagGrayColor {
-    color: #aeafad;
-  }
-  
-  .elementSelectorColor {
-    color: #4f9cd6;
-  }
-  
-  .element-selector-color {
-    color: #4f9cd6;
-  }
-  
-  .selectorColorCSS {
-    color: #d7ba7d;
-  }
-  
-  .functionColor {
-    color: #dcdcaa;
-  }
-  
-  .function-color {
-    color: #dcdcaa;
-  }
-  
-  .const-color {
-      color: var(--const-color);
-  }
-  
-  .class-color {
-      color: var(--classColor);
-  }
-  
-  .symbols-color{
-    color: var(--tagGrayColor);
-  
-  }
-  
-  .cmd{
-    font-family: courier;
-  }
-  
-  .card {
-    font-size: 20px;
-    font-family: consolas;
-    text-align: center;
-    background-color: #1e1e1e;
-    padding: 25px;
-    margin: 0 auto;
-    max-width: 950px;
-  }
-  
-  .card.nightMode {
-    background-color: #1e1e1e;
-  }
-  
-  .deckTree {
-    font-family: Verdana;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 11px;
-    color: #a6a6a6;
-    margin-bottom: 20px;
-  }
-  
-  .subDeck {
-    font-family: courier;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 20px;
-    color: #c5be3f;
-  }
-  
-  .questionField {
-    font-family: courier;
-    font-size: 20px;
-    padding: 0px 0px 20px 0px;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    justify-content: center;
-  }
-  
-  .answerField {
-    border: 2px dashed rgba(85, 85, 85, 0.75);
-    padding: 10px;
-    color: #4cc5a1;
-    margin: 2px 20px 2px 20px;
-    text-align: center;
-  }
-  
-  .answerContainer {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .articleAnswer {
-    margin-bottom: 10px;
-  }
-  
-  .articleAnswer b {
-    font-weight: normal;
-    color: var(--stringColor);
-  }
-  
-  .questionField b {
-    font-weight: normal;
-    color: var(--stringColor);
-  }
-  
-  .articleQuestion {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .extraContainer {
-    display: block;
-    margin-top: 20px;
-    flex-flow: column wrap;
-    align-items: center;
-  }
-  
-  .extra {
-    display: flex;
-    font-size: 20px;
-    border: 2px dashed rgba(85, 85, 85, 0.75);
-    color: #4cc5a1;
-    padding: 10px;
-    margin: 2px 20px 2px 20px;
-    text-align: center;
-  }
-  
-  .notes {
-    font-family: courier;
-    font-size: 20px;
-    border: 2px dashed rgba(85, 85, 85, 0.75);
-    padding: 10px;
-    margin: 3px 20px 3px 20px;
-    text-align: center;
-  }
-  
-  .notesChild {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .notesChild li {
-    text-align: left;
-  }
-  
-  .customButton {
-    display: block;
-    font-family: Menlo;
-    font-size: 16px;
-    color: #bdc3c7;
-    background-color: rgba(85, 85, 85, 0.15);
-    border-radius: 10px;
-    padding: 5px;
-    width: 50%;
-    text-align: center;
-    font-weight: 500;
-    margin: 20px;
-    transition: background-color 0.15s ease-out;
-    cursor: pointer;
-  }
-  
-  .customButton:hover {
-    background-color: rgba(85, 85, 85, 0.35);
-  }
-  
-  .containerFlex {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .fade-in {
-    animation: fadeIn ease 1.5s;
-  }
-  
-  
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+  --class-color: #4cc5a1;
+  --const-color: #4fc1ff;
+  --attribute-css-color: #9cdcfe;
+  --symbols-color: #aeafad;
+  --bgVsCodeColor: #1e1e1e;
+}
 
-  body {
-    background-color: var(--bgVsCodeColor);
-  }
+.class-color {
+  color: var(--class-color);
+}
+
+.attribute-css-color {
+  color: var(--attribute-css-color);
+}
+
+.const-color {
+  color: var(--const-color);
+}
+
+.symbols-color {
+  color: var(--symbols-color);
+}
+
+body {
+  background-color: var(--bgVsCodeColor);
+}
