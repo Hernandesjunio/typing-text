@@ -94,7 +94,7 @@ function typingJS(options) {
 
       lastElement.append(cursorElement);
 
-      cursorElement.setAttribute("style", `top:auto;left:auto;position:relative;opacity:1`);
+      cursorElement.setAttribute("style", `top:auto;left:auto;position:absolute;opacity:1`);
     };
 
     (function removeClass() {
