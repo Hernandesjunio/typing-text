@@ -73,7 +73,7 @@ function typingJS(options) {
       const result = [
         {
           keyFn: () => index == 0,
-          value: 1000,
+          value: options.initialSpeedDelayTime,
         },
         {
           keyFn: () => currentHiddenElement().innerText.trim().length == 0,
