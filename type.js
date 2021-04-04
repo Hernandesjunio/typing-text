@@ -164,9 +164,19 @@ function typingJS(options) {
 
   options = { ...defaultOptions, ...options };
 
-  const container = document.querySelector(options.containerSelector);
+  const containersElements = [options.containerSelector].flat().map((selector) => ({
+    selector: selector,
+    element: document.querySelector(selector),
+  }));
 
-  if (!container) throw new Error("Property 'containerSelector' doesn't contains a valid element selector");
+  const invalidSelector = containersElements.find((d) => !d.element);
+
+  if (invalidSelector)
+    throw new Error(
+      `Property 'containerSelector' doesn't contains a valid element selector for ${invalidSelector.selector}`
+    );
+
+  containersElements.forEach((container) => container.element.classList.add("hide-element-typing"));
 
   if (typeof typingJS.executing == "undefined") typingJS.executing = false;
 
@@ -180,8 +190,9 @@ function typingJS(options) {
   createStyle();
 
   const step1 = (ctx) => (ctx.cursorElement = getCursor());
-  const step2 = () => setClassDeepElements(container, options.tagNamesToHide);
-  const step3 = () => processText(container);
+  const step2 = () =>
+    containersElements.forEach((container) => setClassDeepElements(container.element, options.tagNamesToHide));
+  const step3 = () => containersElements.forEach((container) => processText(container.element));
   const step4 = (ctx) => processHiddenElements(ctx.cursorElement, options);
 
   const chainOfResponsability = {
