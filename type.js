@@ -83,7 +83,7 @@ function typingJS(options) {
           keyFn: () => currentHiddenElement().classList.contains(options.typingDelaySpeedClass),
           value: options.typingDelaySpeed,
         },
-        { keyFn: () => true, value: 20 },
+        { keyFn: () => true, value: options.speedTypingMillisecond },
       ].find((truthy) => truthy.keyFn());
 
       return result.value;
