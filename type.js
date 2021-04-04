@@ -1,6 +1,6 @@
 function typingJS(options) {
   const createStyle = () => {
-    if (document.querySelector("typingStyle")) return;
+    if (document.querySelector("#typingStyle")) return;
     const css = `.hide-element-typing{opacity:0;font-size:20px}.show-element-typing{opacity:1;transition:opacity .3s;font-size:20px}.cursor-typing{position:absolute;color:transparent}.cursor-typing:before{content:".";width:4px;height:10px;background-color:green;color:green;animation:cursor .8s infinite}@keyframes cursor{0%{opacity:1}50%{opacity:0}100%{opacity:1}}`;
     const $style = document.createElement("style");
     $style.innerHTML = css;
