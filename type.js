@@ -158,6 +158,7 @@ function typingJS(options) {
     containerSelector: ".container-typing",
     speedTypingMillisecond: 20,
     typingDelaySpeed: 500,
+    initialSpeedDelayTime: 1000,
     tagNamesToHide: ["LI"],
     callback: () => {},
   };
