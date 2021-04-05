@@ -77,11 +77,11 @@
         </span>
       </div>
     </span>
-    <script src="./dist/typing.min.js"></script>
+    <script src="./typing.min.js"></script>
     <script type="text/javascript">
       (function () {
         const typingObj = typingJS({
-          containerSelector: ".container-typing-1",
+          containerSelector: [".container-typing-1",".container-typing-2"],
           callback: () => console.log("End"),
         });
         const button = document.querySelector(".button-typing");
