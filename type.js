@@ -10,7 +10,7 @@ function typingJS(options) {
 
   const processText = (element) => {
     let index = 0;
-    const wrapChar = (char) => `<span class="hide-element-typing char">${char}</span>`;
+    const wrapChar = (char) => `<span class="hide-element-typing char-typing">${char}</span>`;
     const replaceHtmlSymbols = (text) => text.replace(/&\w+;/g, (c) => wrapChar(c));
 
     const split = replaceHtmlSymbols(element.innerHTML).split("");
@@ -90,7 +90,7 @@ function typingJS(options) {
     };
 
     const setCursorOnLastElementCharacter = () => {
-      const lastElement = hiddenElements.filter((c) => c.classList.contains("char")).slice(-1)[0];
+      const lastElement = hiddenElements.filter((c) => c.classList.contains("char-typing")).slice(-1)[0];
 
       lastElement.append(cursorElement);
 
@@ -120,7 +120,7 @@ function typingJS(options) {
     const offsetY = 2 + window.scrollY,
       offsetX = 8 + window.scrollX;
 
-    if (!element.classList.contains("char")) return;
+    if (!element.classList.contains("char-typing")) return;
 
     const { x, y } = element.getBoundingClientRect();
 
@@ -135,7 +135,7 @@ function typingJS(options) {
     element.classList.contains("hide-element-typing") === false && element.classList.add("hide-element-typing");
     element.classList.contains("show-element-typing") && element.classList.remove("show-element-typing");
 
-    tagNames.includes(element.tagName) && element.classList.add("char");
+    tagNames.includes(element.tagName) && element.classList.add("char-typing");
   };
 
   createCursor = () => {
