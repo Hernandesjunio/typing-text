@@ -32,7 +32,7 @@
     <div>
       <button class="button-typing">Start</button>
     </div>
-    <span class="container-typing-1" style="display: inline-block">
+    <span class="container container-typing-1" style="display: inline-block">
       <div id="parameters" class="notesChild containerFlex typingCursor">
         <span>
           <span class="attribute-css-color">
@@ -55,7 +55,7 @@
       </div>
     </span>
 
-    <span class="container-typing-2" style="display: inline-block">
+    <span class="container container-typing-2" style="display: inline-block">
       <div id="parameters" class="notesChild containerFlex typingCursor">
         <span>
           <span class="attribute-css-color">
@@ -77,11 +77,14 @@
         </span>
       </div>
     </span>
-    <script src="./typing.min.js"></script>
+    <script src="./typing.js"></script>
     <script type="text/javascript">
       (function () {
         const typingObj = typingJS({
-          containerSelector: [".container-typing-1",".container-typing-2"],
+          //containerSelector: [".container-typing-1",".container-typing-2"],
+          containerReference: document.querySelectorAll('.container'),
+          //containerReference: [document.querySelector('.container-typing-1'),
+          //document.querySelector('.container-typing-2')],
           callback: () => console.log("End"),
         });
         const button = document.querySelector(".button-typing");
