@@ -80,10 +80,10 @@ function typingJS(options) {
           value: 0,
         },
         {
-          keyFn: () => currentHiddenElement().classList.contains(options.typingDelaySpeedClass),
-          value: options.typingDelaySpeed,
+          keyFn: () => currentHiddenElement().classList.contains(options.typingSpeedDelayClass),
+          value: options.typingSpeedDelay,
         },
-        { keyFn: () => true, value: options.speedTypingMillisecond },
+        { keyFn: () => true, value: options.typingSpeedMillisecond },
       ].find((truthy) => truthy.keyFn());
 
       return result.value;
@@ -154,11 +154,11 @@ function typingJS(options) {
 
   options = options || {};
   const defaultOptions = {
-    typingDelaySpeedClass: "stop",
+    typingSpeedDelayClass: "stop",
     containerSelector: ".container-typing",
     containerReference: undefined,
-    speedTypingMillisecond: 20,
-    typingDelaySpeed: 500,
+    typingSpeedMillisecond: 20,
+    typingSpeedDelay: 500,
     initialSpeedDelayTime: 1000,
     tagNamesToHide: ["LI"],
     callback: () => {},
