@@ -156,6 +156,7 @@ function typingJS(options) {
   const defaultOptions = {
     typingDelaySpeedClass: "stop",
     containerSelector: ".container-typing",
+    containerReference: undefined,
     speedTypingMillisecond: 20,
     typingDelaySpeed: 500,
     initialSpeedDelayTime: 1000,
@@ -165,19 +166,24 @@ function typingJS(options) {
 
   options = { ...defaultOptions, ...options };
 
-  const containersElements = [options.containerSelector].flat().map((selector) => ({
+  const containersSelectorElements = [options.containerSelector].flat().map((selector) => ({
     selector: selector,
     element: document.querySelector(selector),
   }));
+ 
+  const containerReference = [options.containerReference]
+    .filter((c) => c)
+    .flatMap((c) => (c instanceof NodeList && [...c]) || c)    
+    .map((element) => ({ element: element }));
 
-  const invalidSelector = containersElements.find((d) => !d.element);
+  const containersElements = [...containerReference, ...containersSelectorElements].filter(
+    (container) => container.element
+  );
 
-  if (invalidSelector)
-    throw new Error(
-      `Property 'containerSelector' doesn't contains a valid element selector for ${invalidSelector.selector}`
-    );
+  if (!containersElements.length)
+    throw new Error(`Options does't constains a valid containerSelector or containerReference`);
 
-  containersElements.forEach((container) => container.element.classList.add("hide-element-typing"));
+   containersElements.forEach((container) => container.element.classList.add("hide-element-typing"));
 
   if (typeof typingJS.executing == "undefined") typingJS.executing = false;
 
